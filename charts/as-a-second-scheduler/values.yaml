@@ -1,0 +1,33 @@
+
+# Default values for scheduler-plugins-as-a-second-scheduler.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+scheduler:
+  name: scheduler-plugins-scheduler
+  image: k8s.gcr.io/scheduler-plugins/kube-scheduler:v0.23.10
+  namespace: scheduler-plugins
+  replicaCount: 1
+  leaderElect: false
+
+# LoadVariationRiskBalancing and TargetLoadPacking are not enabled by default
+# as they need extra RBAC privileges on metrics.k8s.io.
+
+plugins:
+  enabled: ["NodeResourcesAllocatable"]
+  disabled: [] # only in-tree plugins need to be defined here
+
+# Customize the enabled plugins' config.
+# Refer to the "pluginConfig" section of manifests/<plugin>/scheduler-config.yaml.
+# For example, for Coscheduling plugin, you want to customize the permit waiting timeout to 10 seconds:
+pluginConfig:
+- name: NodeResourcesAllocatable
+  args:
+    mode: Least
+    resources:
+      - name: cpu
+        weight: 1000000
+      - name: memory
+        weight: 1
+      - name: podNum
+      - weight: 1
