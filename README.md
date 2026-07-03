@@ -1,6 +1,6 @@
 # Overview
 
-Introduce the actual node load (CPU, memory) collected by the Metrics Server and PodNum as a scoring basis during the scheduling Score phase.
+Introduce the actual node load (CPU, memory，PodNum) collected by the Metrics Server and PodNum as a scoring basis during the scheduling Score phase.
 
 ## Load-Aware-Scheduler-Plugin
 ### Resource Weights
